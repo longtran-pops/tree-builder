@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+import './App.css'
+const TreeNode = ({ name }) => {
+  return (
+    <div
+      style={{
+        display: 'inline-block',
+        padding: '16px',
+        background: '#000',
+        color: '#fff',
+        borderRadius: '4px',
+        minWidth: '60px',
+        textAlign: 'center',
+      }}
+    >
+      {name}
+    </div>
+  )
+}
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div className='tree'>
+        <TreeNode name='root' />
+      </div>
+      <div className='input-zone'>
+        <label>Name</label>
+        <input value='' placeholder='Node Name' />
+        <button>Save</button>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
