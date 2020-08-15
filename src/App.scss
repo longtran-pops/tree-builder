@@ -34,3 +34,34 @@
   text-align: center;
   margin-top: 16px;
 }
+
+.Tree-container {
+  padding: 35px;
+}
+.Tree ul {
+  padding-left: 0px;
+  list-style: none;
+  li {
+    margin-top: 5px;
+    ul {
+      padding-left: 32px;
+    }
+  }
+}
+
+.node {
+  display: inline-block;
+  padding: 16px;
+  background: #000;
+  color: #fff;
+  border-radius: 4px;
+  min-width: 60px;
+  text-align: center;
+  min-height: 20px;
+}
+
+.node_empty {
+  border: dotted 1px lightgray;
+  background: #1a1e22;
+  cursor: pointer;
+}
