@@ -12,6 +12,8 @@ const initialData = JSON.parse(localStorage.getItem('localNode'))|| {
 }
 
 const reducer = function(state, action) {
+
+  // tree and callback
   const bfs = function (startNode,callback = console.log) {
     if (!startNode) return
     const stack = []
@@ -22,7 +24,10 @@ const reducer = function(state, action) {
     while (stack.length) {
       const nodeItem = stack.pop()
       const leaveNodes = nodeItem.data || []
-      result.push(doCallback(nodeItem))
+      if(doCallback(nodeItem)) {
+        result.push(nodeItem)
+        break;
+      }
       leaveNodes.forEach((childNode) => stack.push(childNode))
     }
     return result
@@ -45,9 +50,21 @@ const reducer = function(state, action) {
       let subData = [];
       let newNodeId = nodeId;
       const getNewNode = (nde) => {
-        if(nde.id === newNodeId) foundNode = nde
+        if(nde.id === newNodeId) {
+          foundNode = nde
+          return true
+        }
+        return false
       }
-      const filterData = node => node.id !== subData.id
+      const filterData = (originData, newData) => {
+        return originData.map(node => {
+          let newDnode = {...node}
+          if(node.id === subData.id) {
+            newDnode = newData
+          }
+          return newDnode
+        })
+      }
       while(newNodeId.length) {
         bfs(state.node, getNewNode)
 
@@ -71,10 +88,7 @@ const reducer = function(state, action) {
           subData = {
             ...foundNode,
             data: [
-              ...foundNode.data.filter(filterData),
-              {
-                ...subData
-              }
+              ...filterData(foundNode.data, subData)
             ]
           }
         }
@@ -85,10 +99,13 @@ const reducer = function(state, action) {
       newNode = {
         ...newNode,
         data: [
-          ...newNode.data.filter(node => node.id !== foundNode.id),
-          {
-            ...subData
-          }
+          ...newNode.data.map(node => {
+            let newDNode = {...node}
+            if(node.id === subData.id) {
+              newDNode = subData
+            }
+            return newDNode
+          })
         ]
       }
     }
