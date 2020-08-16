@@ -34,3 +34,6 @@
   text-align: center;
   margin-top: 16px;
 }
+.input-zone button:disabled {
+  background: rgb(68, 68, 68);
+}

@@ -1,0 +1,10 @@
+.leaf-node {
+  cursor: pointer;
+  display: inline-flex;
+  padding: 16px 40px;
+  background: rgb(51, 51, 51);
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px dashed rgb(163, 163, 163);
+}
